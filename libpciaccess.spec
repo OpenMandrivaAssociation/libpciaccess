@@ -2,7 +2,7 @@
 %define version	0.8.0
 %define git	20070804
 %if %git
-%define release	%mkrel 0.%git.1
+%define release	%mkrel 0.%git.2
 %else
 %define release	%mkrel 1
 %endif
@@ -40,6 +40,7 @@ A generic PCI access library from X.org.
 %package -n %{develname}
 Summary:	Development headers and libraries for %{name}
 Group:		Development/X11
+Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{develname}
 A generic PCI access library from X.org. Development headers and
