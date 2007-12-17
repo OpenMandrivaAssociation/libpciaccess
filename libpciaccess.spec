@@ -24,7 +24,6 @@ Source0:	libpciaccess-%{git}.tar.bz2
 Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
 %endif
 License:	MIT
-BuildRoot:	%{_tmppath}/%{name}-root
 BuildRequires:	pciids
 
 %description
