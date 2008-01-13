@@ -4,7 +4,7 @@
 %if %git
 %define release	%mkrel 0.%git.3
 %else
-%define release	%mkrel 1
+%define release	%mkrel 2
 %endif
 
 %define major		0
