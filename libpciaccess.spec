@@ -1,3 +1,5 @@
+%define name	libpciaccess
+%define version	0.9.1
 %define git	0
 %if %git
 %define release	%mkrel 0.%git.3
@@ -9,8 +11,8 @@
 %define libname		%mklibname pciaccess %major
 %define develname	%mklibname pciaccess -d
 
-Name:		libpciaccess
-Version:	0.9.1
+Name:		%{name}
+Version:	%{version}
 Release:	%{release}
 Summary:	Generic PCI access library (from X.org)
 Group:		Development/X11
