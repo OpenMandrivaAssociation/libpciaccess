@@ -2,9 +2,9 @@
 %define version	0.10.3
 %define git	0
 %if %git
-%define release	%mkrel 0.%git.3
+%define release	%mkrel 4.%git.3
 %else
-%define release	%mkrel 1
+%define release	%mkrel 2
 %endif
 
 %define major		0
