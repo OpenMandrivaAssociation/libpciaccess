@@ -1,8 +1,8 @@
 %define name	libpciaccess
-%define version	0.10.4
+%define version	0.10.5
 %define git	0
 %if %git
-%define release	%mkrel 4.%git.3
+%define release	%mkrel 0.%git.1
 %else
 %define release	%mkrel 1
 %endif
