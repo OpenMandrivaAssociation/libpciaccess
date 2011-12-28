@@ -1,30 +1,15 @@
-%define name	libpciaccess
-%define version	0.12.1
-%define git	0
-%if %git
-%define release	%mkrel 0.%git.2
-%else
-%define release	%mkrel 2
-%endif
-
 %define major		0
 %define libname		%mklibname pciaccess %major
 %define develname	%mklibname pciaccess -d
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		libpciaccess
+Version:	0.12.1
+Release:	3
 Summary:	Generic PCI access library (from X.org)
 Group:		Development/X11
-URL:		http://xorg.freedesktop.org
-%if %git
-# git clone git://anongit.freedesktop.org/git/xorg/lib/libpciaccess
-Source0:	libpciaccess-%{git}.tar.bz2
-%else
-Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
-%endif
 License:	MIT
-BuildRoot:	%{_tmppath}/%{name}-root
+URL:		http://xorg.freedesktop.org
+Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
 BuildRequires:	pciids
 
 %description
@@ -48,42 +33,24 @@ A generic PCI access library from X.org. Development headers and
 libraries.
 
 %prep
-%if %git
-%setup -q -n %{name}
-%else
-%setup -q -n %{name}-%{version}
-%endif
+%setup -q
 
 %build
-%if %git
-./autogen.sh
-%endif
-%configure2_5x	--with-pciids-path=/usr/share
+%configure2_5x \
+	--disable-static \
+	--with-pciids-path=/usr/share
+
 %make
 
 %install
 rm -rf %{buildroot}
 %makeinstall_std
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %{_libdir}/*.so
-%{_libdir}/*.*a
 %{_includedir}/*.h
 %{_libdir}/pkgconfig/*.pc
 
