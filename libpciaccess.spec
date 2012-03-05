@@ -3,8 +3,8 @@
 %define develname	%mklibname pciaccess -d
 
 Name:		libpciaccess
-Version:	0.12.1
-Release:	3
+Version:	0.13
+Release:	1
 Summary:	Generic PCI access library (from X.org)
 Group:		Development/X11
 License:	MIT
@@ -43,7 +43,6 @@ libraries.
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 %files -n %{libname}
