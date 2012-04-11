@@ -3,7 +3,7 @@
 %define develname	%mklibname pciaccess -d
 
 Name:		libpciaccess
-Version:	0.13
+Version:	0.13.1
 Release:	1
 Summary:	Generic PCI access library (from X.org)
 Group:		Development/X11
@@ -52,4 +52,3 @@ libraries.
 %{_libdir}/*.so
 %{_includedir}/*.h
 %{_libdir}/pkgconfig/*.pc
-
