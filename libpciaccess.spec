@@ -3,7 +3,7 @@
 %define devname	%mklibname pciaccess -d
 %define	static	%mklibname pciaccess -d -s
 
-%bcond_with	uclibc
+%bcond_without	uclibc
 Name:		libpciaccess
 Version:	0.13.1
 Release:	2
@@ -14,7 +14,7 @@ URL:		http://xorg.freedesktop.org
 Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
 BuildRequires:	pciids
 %if %{with uclibc}
-BuildRequires:	uClibc-devel
+BuildRequires:	uClibc-devel >= 0.9.33-13
 %endif
 
 %description
@@ -54,8 +54,8 @@ CONFIGURE_TOP="$PWD"
 %if %{with uclibc}
 mkdir -p uclibc
 pushd uclibc
-%configure2_5x	CC="%{uclibc_cc}" \
-		CFLAGS="%{uclibc_cflags}" \
+%uclibc_configure \
+		--disable-silent-rules \
 		--disable-shared \
 		--enable-static \
 		--with-pciids-path=/usr/share
@@ -73,6 +73,7 @@ popd
 %install
 %if %{with uclibc}
 %makeinstall_std -C uclibc
+rm %{buildroot}%{uclibc_root}%{_libdir}/pkgconfig/pciaccess.pc
 %endif
 
 %makeinstall_std -C system
