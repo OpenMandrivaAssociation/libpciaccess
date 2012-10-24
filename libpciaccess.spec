@@ -14,7 +14,7 @@ URL:		http://xorg.freedesktop.org
 Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
 BuildRequires:	pciids
 %if %{with uclibc}
-BuildRequires:	uClibc-devel >= 0.9.33-14
+BuildRequires:	uClibc-devel >= 0.9.33.2-14
 %endif
 
 %description
