@@ -6,7 +6,7 @@
 %bcond_without	uclibc
 Name:		libpciaccess
 Version:	0.13.1
-Release:	3
+Release:	4
 Summary:	Generic PCI access library (from X.org)
 Group:		Development/X11
 License:	MIT
@@ -57,7 +57,7 @@ mkdir -p uclibc
 pushd uclibc
 %uclibc_configure \
 		--disable-static \
-		--with-pciids-path=/usr/share
+		--with-pciids-path=%_datadir
 %make
 popd
 %endif
@@ -65,7 +65,7 @@ popd
 mkdir -p system
 pushd system
 %configure2_5x	--disable-static \
-		--with-pciids-path=/usr/share
+		--with-pciids-path=%_datadir
 %make
 popd
 
