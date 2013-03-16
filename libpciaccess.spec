@@ -80,8 +80,10 @@ rm %{buildroot}%{uclibc_root}%{_libdir}/pkgconfig/pciaccess.pc
 %files -n %{libname}
 %{_libdir}/libpciaccess.so.%{major}*
 
+%if %{with uclibc}
 %files -n uclibc-%{libname}
 %{uclibc_root}%{_libdir}/libpciaccess.so.%{major}*
+%endif
 
 %files -n %{devname}
 %{_libdir}/libpciaccess.so
