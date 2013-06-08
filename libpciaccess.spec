@@ -1,16 +1,15 @@
 %define major	0
 %define libname	%mklibname pciaccess %major
 %define devname	%mklibname pciaccess -d
-%define	static	%mklibname pciaccess -d -s
-
 %bcond_without	uclibc
+
+Summary:	Generic PCI access library (from X.org)
 Name:		libpciaccess
 Version:	0.13.1
 Release:	4
-Summary:	Generic PCI access library (from X.org)
 Group:		Development/X11
 License:	MIT
-URL:		http://xorg.freedesktop.org
+Url:		http://xorg.freedesktop.org
 Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
 BuildRequires:	pciids
 %if %{with uclibc}
@@ -56,16 +55,17 @@ CONFIGURE_TOP="$PWD"
 mkdir -p uclibc
 pushd uclibc
 %uclibc_configure \
-		--disable-static \
-		--with-pciids-path=%_datadir
+	--disable-static \
+	--with-pciids-path=%{_datadir}
 %make
 popd
 %endif
 
 mkdir -p system
 pushd system
-%configure2_5x	--disable-static \
-		--with-pciids-path=%_datadir
+%configure2_5x \
+	--disable-static \
+	--with-pciids-path=%{_datadir}
 %make
 popd
 
@@ -92,3 +92,4 @@ rm %{buildroot}%{uclibc_root}%{_libdir}/pkgconfig/pciaccess.pc
 %endif
 %{_includedir}/pciaccess.h
 %{_libdir}/pkgconfig/pciaccess.pc
+
