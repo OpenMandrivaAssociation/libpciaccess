@@ -1,12 +1,12 @@
-%define major	0
-%define libname	%mklibname pciaccess %major
-%define devname	%mklibname pciaccess -d
+%define major 0
+%define libname %mklibname pciaccess %major
+%define devname %mklibname pciaccess -d
 %bcond_without	uclibc
 
 Summary:	Generic PCI access library (from X.org)
 Name:		libpciaccess
-Version:	0.13.2
-Release:	8
+Version:	0.13.3
+Release:	1
 Group:		Development/X11
 License:	MIT
 Url:		http://xorg.freedesktop.org
@@ -19,21 +19,23 @@ BuildRequires:	uClibc-devel >= 0.9.33.2-14
 %description
 A generic PCI access library from X.org.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	Generic PCI access library (from X.org)
 Group:		Development/X11
 
 %description -n	%{libname}
 A generic PCI access library from X.org.
 
-%package -n	uclibc-%{libname}
+%if %{with uclibc}
+%package -n uclibc-%{libname}
 Summary:	Generic PCI access library (from X.org) (uClibc build)
 Group:		Development/X11
 
 %description -n	uclibc-%{libname}
 A generic PCI access library from X.org.
+%endif
 
-%package -n	%{devname}
+%package -n %{devname}
 Summary:	Development headers and libraries for %{name}
 Group:		Development/X11
 Requires:	%{libname} = %{version}
@@ -63,7 +65,7 @@ popd
 
 mkdir -p system
 pushd system
-%configure2_5x \
+%configure \
 	--disable-static \
 	--with-pciids-path=%{_datadir}
 %make
