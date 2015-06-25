@@ -6,7 +6,7 @@
 Summary:	Generic PCI access library (from X.org)
 Name:		libpciaccess
 Version:	0.13.4
-Release:	1
+Release:	2
 Group:		Development/X11
 License:	MIT
 Url:		http://xorg.freedesktop.org
@@ -33,15 +33,24 @@ Group:		Development/X11
 
 %description -n	uclibc-%{libname}
 A generic PCI access library from X.org.
+
+%package -n uclibc-%{devname}
+Summary:	Development headers and libraries for %{name}
+Group:		Development/X11
+Requires:	uclibc-%{libname} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
+Provides:	uclibc-%{name}-devel = %{EVRD}
+Conflicts:	%{devname} < 0.13.4-2
+
+%description -n uclibc-%{devname}
+A generic PCI access library from X.org. Development headers and
+libraries.
 %endif
 
 %package -n %{devname}
 Summary:	Development headers and libraries for %{name}
 Group:		Development/X11
 Requires:	%{libname} = %{version}
-%if %{with uclibc}
-Requires:	uclibc-%{libname} = %{version}
-%endif
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{devname}
@@ -85,13 +94,13 @@ rm %{buildroot}%{uclibc_root}%{_libdir}/pkgconfig/pciaccess.pc
 %if %{with uclibc}
 %files -n uclibc-%{libname}
 %{uclibc_root}%{_libdir}/libpciaccess.so.%{major}*
+
+%files -n uclibc-%{devname}
+%{uclibc_root}%{_libdir}/libpciaccess.so
 %endif
 
 %files -n %{devname}
 %{_libdir}/libpciaccess.so
-%if %{with uclibc}
-%{uclibc_root}%{_libdir}/libpciaccess.so
-%endif
 %{_includedir}/pciaccess.h
 %{_libdir}/pkgconfig/pciaccess.pc
 
