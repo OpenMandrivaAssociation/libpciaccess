@@ -1,12 +1,12 @@
 %define major 0
 %define libname %mklibname pciaccess %major
 %define devname %mklibname pciaccess -d
-%bcond_without	uclibc
+%bcond_with	uclibc
 
 Summary:	Generic PCI access library (from X.org)
 Name:		libpciaccess
 Version:	0.13.4
-Release:	3
+Release:	4
 Group:		Development/X11
 License:	MIT
 Url:		http://xorg.freedesktop.org
