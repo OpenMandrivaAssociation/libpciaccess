@@ -13,12 +13,11 @@ Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.
 Patch0:		0000-Include-config.h-before-anything-else-in-.c.patch
 Patch1:		0001-Fix-quoting-issue.patch
 Patch2:		0002-linux_sysfs.c-Include-limits.h-for-PATH_MAX.patch
-Patch3:		0004-autogen.sh-pass-force-to-autoreconf-quote-string-var.patch
-Patch4:		0005-linux_sysfs-include-limits.h-for-PATH_MAX.patch
-Patch5:		0006-libpciaccess-Fix-incorrect-format-specification.patch
-Patch6:		0007-vgaarb-add-a-the-trailing-NULL-character-on-read-vga.patch
-Patch7:		0008-device-name-handle-calloc-failure-in-insert.patch
-Patch8:		0009-Ignore-32-bit-domains.patch
+Patch3:		0005-linux_sysfs-include-limits.h-for-PATH_MAX.patch
+Patch4:		0006-libpciaccess-Fix-incorrect-format-specification.patch
+Patch5:		0007-vgaarb-add-a-the-trailing-NULL-character-on-read-vga.patch
+Patch6:		0008-device-name-handle-calloc-failure-in-insert.patch
+Patch7:		0009-Ignore-32-bit-domains.patch
 BuildRequires:	pciids
 
 %description
