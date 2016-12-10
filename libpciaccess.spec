@@ -19,6 +19,7 @@ Patch5:		0007-vgaarb-add-a-the-trailing-NULL-character-on-read-vga.patch
 Patch6:		0008-device-name-handle-calloc-failure-in-insert.patch
 Patch7:		0009-Ignore-32-bit-domains.patch
 BuildRequires:	pciids
+BuildRequires:	pkgconfig(xorg-macros)
 
 %description
 A generic PCI access library from X.org.
