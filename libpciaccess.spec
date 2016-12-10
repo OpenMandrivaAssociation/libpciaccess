@@ -52,8 +52,7 @@ libraries.
 %make
 
 %install
-
-%makeinstall_std -C system
+%makeinstall_std
 
 %files -n %{libname}
 %{_libdir}/libpciaccess.so.%{major}*
