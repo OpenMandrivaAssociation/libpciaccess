@@ -1,0 +1,55 @@
+From 201d1a7623c83f611761f67d4411c3c266f8f37a Mon Sep 17 00:00:00 2001
+From: arsharma <ankitprasad.r.sharma@intel.com>
+Date: Mon, 23 Feb 2015 21:31:07 +0000
+Subject: [PATCH 8/9] device-name: handle calloc failure in insert()
+
+Issue was spotted by Klocwork, and fixed by arsharma as part of
+Android-ia.
+
+Just bail out if memory allocation fails. All the callers of insert()
+already handle the case.
+
+[Emil Velikov: Split from larger patch, write commit message]
+Signed-off-by: Emil Velikov <emil.l.velikov@gmail.com>
+---
+ src/common_device_name.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/src/common_device_name.c b/src/common_device_name.c
+index a990ac8..3dd35d7 100644
+--- a/src/common_device_name.c
++++ b/src/common_device_name.c
+@@ -154,6 +154,10 @@ insert( uint16_t vendor )
+ 
+     if ( tree == NULL ) {
+ 	tree = calloc( 1, sizeof( struct pci_id_node ) );
++
++	if ( tree == NULL )
++	    return NULL;
++
+ 	tree->bits = 4;
+     }
+ 
+@@ -175,6 +179,9 @@ insert( uint16_t vendor )
+ 		struct pci_id_node * child =
+ 		    calloc( 1, sizeof( struct pci_id_node ) );
+ 
++		if ( tree == NULL )
++		    return NULL;
++
+ 		child->bits = 4;
+ 
+ 		n->children[ idx ] = child;
+@@ -183,6 +190,9 @@ insert( uint16_t vendor )
+ 		struct pci_id_leaf * leaf =
+ 		    calloc( 1, sizeof( struct pci_id_leaf ) );
+ 
++		if ( tree == NULL )
++		    return NULL;
++
+ 		leaf->vendor = vendor;
+ 
+ 		n->children[ idx ] = (struct pci_id_node *) leaf;
+-- 
+2.8.3
+
