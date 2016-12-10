@@ -1,0 +1,26 @@
+From 8ea3af620a2d4ad5648917b4a0ef2b23ff566774 Mon Sep 17 00:00:00 2001
+From: Felix Janda <felix.janda@posteo.de>
+Date: Thu, 4 Dec 2014 23:52:22 +0100
+Subject: [PATCH 5/9] linux_sysfs: include <limits.h> for PATH_MAX
+
+Signed-off-by: Felix Janda <felix.janda@posteo.de>
+Tested-by: Bernd Kuhls <bernd.kuhls@t-online.de>
+---
+ src/linux_sysfs.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/linux_sysfs.c b/src/linux_sysfs.c
+index 3f95e53..5a59bd8 100644
+--- a/src/linux_sysfs.c
++++ b/src/linux_sysfs.c
+@@ -49,6 +49,7 @@
+ #include <sys/mman.h>
+ #include <dirent.h>
+ #include <errno.h>
++#include <limits.h>
+ 
+ #if defined(__i386__) || defined(__x86_64__) || defined(__arm__)
+ #include <sys/io.h>
+-- 
+2.8.3
+

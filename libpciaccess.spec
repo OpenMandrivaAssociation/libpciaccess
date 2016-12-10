@@ -1,20 +1,26 @@
 %define major 0
 %define libname %mklibname pciaccess %major
 %define devname %mklibname pciaccess -d
-%bcond_with	uclibc
 
 Summary:	Generic PCI access library (from X.org)
 Name:		libpciaccess
 Version:	0.13.4
-Release:	6
+Release:	7
 Group:		Development/X11
 License:	MIT
 Url:		http://xorg.freedesktop.org
 Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
+Patch0:		0000-Include-config.h-before-anything-else-in-.c.patch
+Patch1:		0001-Fix-quoting-issue.patch
+Patch2:		0002-linux_sysfs.c-Include-limits.h-for-PATH_MAX.patch
+Patch3:		0003-chmod-a-x-README.cygwin.patch
+Patch4:		0004-autogen.sh-pass-force-to-autoreconf-quote-string-var.patch
+Patch5:		0005-linux_sysfs-include-limits.h-for-PATH_MAX.patch
+Patch6:		0006-libpciaccess-Fix-incorrect-format-specification.patch
+Patch7:		0007-vgaarb-add-a-the-trailing-NULL-character-on-read-vga.patch
+Patch8:		0008-device-name-handle-calloc-failure-in-insert.patch
+Patch9:		0009-Ignore-32-bit-domains.patch
 BuildRequires:	pciids
-%if %{with uclibc}
-BuildRequires:	uClibc-devel >= 0.9.33.2-14
-%endif
 
 %description
 A generic PCI access library from X.org.
@@ -25,27 +31,6 @@ Group:		Development/X11
 
 %description -n	%{libname}
 A generic PCI access library from X.org.
-
-%if %{with uclibc}
-%package -n uclibc-%{libname}
-Summary:	Generic PCI access library (from X.org) (uClibc build)
-Group:		Development/X11
-
-%description -n	uclibc-%{libname}
-A generic PCI access library from X.org.
-
-%package -n uclibc-%{devname}
-Summary:	Development headers and libraries for %{name}
-Group:		Development/X11
-Requires:	uclibc-%{libname} = %{EVRD}
-Requires:	%{devname} = %{EVRD}
-Provides:	uclibc-%{name}-devel = %{EVRD}
-Conflicts:	%{devname} < 0.13.4-2
-
-%description -n uclibc-%{devname}
-A generic PCI access library from X.org. Development headers and
-libraries.
-%endif
 
 %package -n %{devname}
 Summary:	Development headers and libraries for %{name}
@@ -59,48 +44,22 @@ libraries.
 
 %prep
 %setup -q
+%apply_patches
 
 %build
-CONFIGURE_TOP="$PWD"
-%if %{with uclibc}
-mkdir -p uclibc
-pushd uclibc
-%uclibc_configure \
-	--disable-static \
-	--with-pciids-path=%{_datadir}
-%make
-popd
-%endif
-
-mkdir -p system
-pushd system
 %configure \
 	--disable-static \
 	--with-pciids-path=%{_datadir}
 %make
-popd
 
 %install
-%if %{with uclibc}
-%makeinstall_std -C uclibc
-rm %{buildroot}%{uclibc_root}%{_libdir}/pkgconfig/pciaccess.pc
-%endif
 
 %makeinstall_std -C system
 
 %files -n %{libname}
 %{_libdir}/libpciaccess.so.%{major}*
 
-%if %{with uclibc}
-%files -n uclibc-%{libname}
-%{uclibc_root}%{_libdir}/libpciaccess.so.%{major}*
-
-%files -n uclibc-%{devname}
-%{uclibc_root}%{_libdir}/libpciaccess.so
-%endif
-
 %files -n %{devname}
 %{_libdir}/libpciaccess.so
 %{_includedir}/pciaccess.h
 %{_libdir}/pkgconfig/pciaccess.pc
-
