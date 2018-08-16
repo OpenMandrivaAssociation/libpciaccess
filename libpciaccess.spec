@@ -5,12 +5,12 @@
 Summary:	Generic PCI access library (from X.org)
 Name:		libpciaccess
 Version:	0.14
-Release:	1
+Release:	2
 Group:		Development/X11
 License:	MIT
 Url:		http://xorg.freedesktop.org
 Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
-BuildRequires:	pciids
+BuildRequires:	hwdata >= 0.314
 BuildRequires:	pkgconfig(xorg-macros)
 
 %description
@@ -19,6 +19,7 @@ A generic PCI access library from X.org.
 %package -n %{libname}
 Summary:	Generic PCI access library (from X.org)
 Group:		Development/X11
+Requires:	hwdata >= 0.314
 
 %description -n	%{libname}
 A generic PCI access library from X.org.
@@ -39,8 +40,8 @@ libraries.
 
 %build
 %configure \
-	--disable-static \
-	--with-pciids-path=%{_datadir}
+	--disable-static
+
 %make
 
 %install
