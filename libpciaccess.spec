@@ -2,10 +2,12 @@
 %define libname %mklibname pciaccess %major
 %define devname %mklibname pciaccess -d
 
+%global optflags %{optflags} -O3
+
 Summary:	Generic PCI access library (from X.org)
 Name:		libpciaccess
-Version:	0.14
-Release:	3
+Version:	0.15
+Release:	1
 Group:		Development/X11
 License:	MIT
 Url:		http://xorg.freedesktop.org
@@ -35,17 +37,16 @@ A generic PCI access library from X.org. Development headers and
 libraries.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
 %configure \
 	--disable-static
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %files -n %{libname}
 %{_libdir}/libpciaccess.so.%{major}*
