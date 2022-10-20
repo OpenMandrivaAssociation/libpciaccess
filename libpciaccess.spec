@@ -15,12 +15,12 @@
 
 Summary:	Generic PCI access library (from X.org)
 Name:		libpciaccess
-Version:	0.16
-Release:	2
+Version:	0.17
+Release:	1
 Group:		Development/X11
 License:	MIT
 Url:		http://xorg.freedesktop.org
-Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.bz2
+Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.xz
 BuildRequires:	hwdata >= 0.314
 BuildRequires:	pkgconfig(xorg-macros)
 
@@ -50,6 +50,7 @@ libraries.
 Summary:	Generic PCI access library (from X.org) (32-bit)
 Group:		Development/X11
 Requires:	hwdata >= 0.314
+BuildRequires:	libc6
 
 %description -n	%{lib32name}
 A generic PCI access library from X.org.
