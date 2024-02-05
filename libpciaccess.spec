@@ -24,6 +24,10 @@ Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.
 BuildRequires:  meson
 BuildRequires:	hwdata >= 0.314
 BuildRequires:	pkgconfig(xorg-macros)
+BuildRequires:  pkgconfig(zlib)
+%if %{with compat32}
+BuildRequires:  devel(libz)
+%endif
 
 %description
 A generic PCI access library from X.org.
