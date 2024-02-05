@@ -21,8 +21,13 @@ Group:		Development/X11
 License:	MIT
 Url:		http://xorg.freedesktop.org
 Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.xz
+BuildRequires:  meson
 BuildRequires:	hwdata >= 0.314
 BuildRequires:	pkgconfig(xorg-macros)
+BuildRequires:  pkgconfig(zlib)
+%if %{with compat32}
+BuildRequires:  devel(libz)
+%endif
 
 %description
 A generic PCI access library from X.org.
@@ -68,29 +73,22 @@ libraries.
 
 %prep
 %autosetup -p1
-export CONFIGURE_TOP="$(pwd)"
 %if %{with compat32}
-mkdir build32
-cd build32
-%configure32
-cd ..
+%meson32 --debug \
 %endif
-
-mkdir build
-cd build
-%configure
+%meson
 
 %build
 %if %{with compat32}
-%make_build -C build32
+%ninja_build -C build32
 %endif
-%make_build -C build
+%meson_build
 
 %install
 %if %{with compat32}
-%make_install -C build32
+%ninja_install -C build32
 %endif
-%make_install -C build
+%meson_install
 
 %files -n %{libname}
 %{_libdir}/libpciaccess.so.%{major}*
