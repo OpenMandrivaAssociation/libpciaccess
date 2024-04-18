@@ -15,12 +15,12 @@
 
 Summary:	Generic PCI access library (from X.org)
 Name:		libpciaccess
-Version:	0.18
+Version:	0.18.1
 Release:	1
 Group:		Development/X11
 License:	MIT
-Url:		http://xorg.freedesktop.org
-Source0:	http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.xz
+Url:		https://xorg.freedesktop.org
+Source0:	https://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.xz
 BuildRequires:  meson
 BuildRequires:	hwdata >= 0.314
 BuildRequires:	pkgconfig(xorg-macros)
