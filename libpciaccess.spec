@@ -15,7 +15,7 @@
 
 Summary:	Generic PCI access library (from X.org)
 Name:		libpciaccess
-Version:	0.18.1
+Version:	0.19
 Release:	1
 Group:		Development/X11
 License:	MIT
